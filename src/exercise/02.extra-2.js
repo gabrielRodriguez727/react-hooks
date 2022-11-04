@@ -1,19 +1,16 @@
 // useEffect: persistent state
-// http://localhost:3000/isolated/exercise/02.js
+// 💯 effect dependencies
+// http://localhost:3000/isolated/final/02.extra-2.js
 
 import * as React from 'react'
 
 function Greeting({ initialName = '' }) {
-  // 🐨 initialize the state to the value from localStorage
-  // 💰 window.localStorage.getItem('name') ?? initialName
   const [name, setName] = React.useState(window.localStorage.getItem('name') ?? initialName)
 
-  // 🐨 Here's where you'll use `React.useEffect`.
-  // The callback should set the `name` in localStorage.
-  // 💰 window.localStorage.setItem('name', name)
   React.useEffect(() => {
     window.localStorage.setItem('name', name)
-  })
+  }, [name])
+  // Add dependencies for the execution of useEffect
 
   function handleChange(event) {
     setName(event.target.value)
