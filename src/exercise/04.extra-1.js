@@ -1,22 +1,29 @@
 // useState: tic tac toe
-// http://localhost:3000/isolated/final/04.js
+// add localstorage to save state
+// http://localhost:3000/isolated/exercise/04.extra.js
 
 import * as React from 'react'
 
 function Board() {
-  const [squares, setSquares] = React.useState(Array(9).fill(null))
-
+  const [squares, setSquares] = React.useState(
+    () =>
+      JSON.parse(window.localStorage.getItem('squares')) || Array(9).fill(null),
+  )
   const nextValue = calculateNextValue(squares)
   const winner = calculateWinner(squares)
   const status = calculateStatus(winner, squares, nextValue)
 
+  React.useEffect(() => {
+    window.localStorage.setItem('squares', JSON.stringify(squares))
+  }, [squares])
+
   function selectSquare(square) {
-    if (winner || squares[square]) {
-      return
-    }
-    const squaresCopy = [...squares]
-    squaresCopy[square] = nextValue
-    setSquares(squaresCopy)
+    if (winner || squares[square]) return
+    const copySquares = [...squares]
+    copySquares[square] = nextValue
+    setSquares(copySquares)
+
+    setNextValue(calculateNextValue(squares))
   }
 
   function restart() {
@@ -66,18 +73,21 @@ function Game() {
   )
 }
 
+// eslint-disable-next-line no-unused-vars
 function calculateStatus(winner, squares, nextValue) {
   return winner
     ? `Winner: ${winner}`
     : squares.every(Boolean)
-    ? `Scratch: Cat's game`
-    : `Next player: ${nextValue}`
+      ? `Scratch: Cat's game`
+      : `Next player: ${nextValue}`
 }
 
+// eslint-disable-next-line no-unused-vars
 function calculateNextValue(squares) {
   return squares.filter(Boolean).length % 2 === 0 ? 'X' : 'O'
 }
 
+// eslint-disable-next-line no-unused-vars
 function calculateWinner(squares) {
   const lines = [
     [0, 1, 2],

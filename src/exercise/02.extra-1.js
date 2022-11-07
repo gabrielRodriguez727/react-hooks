@@ -9,7 +9,7 @@ function Greeting({ initialName = '' }) {
   // useState with Lazy initialization. 
   // The operation is executed only one time, instead of multiple times if te initial state is calculated inside the function component and passed as a variable.
   // const initialState = getInitialStateCalculatingSomethingExpensive().
-  const getInitialStateCalculatingSomethingExpensive = () => { window.localStorage.getItem('name') ?? initialName }
+  const getInitialStateCalculatingSomethingExpensive = () => window.localStorage.getItem('name') ?? initialName
   const [name, setName] = React.useState(getInitialStateCalculatingSomethingExpensive)
 
 
