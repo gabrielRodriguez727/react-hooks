@@ -95,6 +95,34 @@ function App() {
     }
   }, [showChild])
 
+
+  // React.useLayoutEffect(() => {
+  //   console.log('%cApp: useLayoutEffect(() => {})', 'color: LightCoral')
+  //   return () => {
+  //     console.log('%cApp: useLayoutEffect(() => {}) cleanup 🧹', 'color: LightCoral')
+  //   }
+  // })
+
+  // React.useLayoutEffect(() => {
+  //   console.log('%cApp: useLayoutEffect(() => {}, [])', 'color: MediumTurquoise')
+  //   return () => {
+  //     console.log(
+  //       '%cApp: useLayoutEffect(() => {}, []) cleanup 🧹',
+  //       'color: MediumTurquoise',
+  //     )
+  //   }
+  // }, [])
+
+  // React.useLayoutEffect(() => {
+  //   console.log('%cApp: useLayoutEffect(() => {}, [showChild])', 'color: HotPink')
+  //   return () => {
+  //     console.log(
+  //       '%cApp: useLayoutEffect(() => {}, [showChild]) cleanup 🧹',
+  //       'color: HotPink',
+  //     )
+  //   }
+  // }, [showChild])
+
   const element = (
     <>
       <label>
